@@ -10,7 +10,16 @@ class App extends Component {
     bad: 0,
   };
 
-  addFeedbackScore = event => {};
+  addFeedbackScore = event => {
+    const clickedButton = event.target.textContent;
+    // console.log(clickedButton);
+    // console.log([clickedButton]);
+    // this.setState(prevState => console.log(prevState));
+    // document.activeElement.blur();
+    this.setState(prevState => ({
+      [clickedButton]: (prevState[clickedButton] += 1),
+    }));
+  };
 
   render() {
     return (
