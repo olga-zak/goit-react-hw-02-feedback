@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { FeedbackButtons } from './FeedbackButtons/FeedbackButtons';
 import { Section } from './Section/Section';
+import { FeedbackData } from './FeedbackData/FeedbackData';
 
 class App extends Component {
   state = {
@@ -9,13 +10,25 @@ class App extends Component {
     bad: 0,
   };
 
+  addFeedbackScore = event => {};
+
   render() {
     return (
-      <div>
+      <>
         <Section title="Please, leave feedback">
-          <FeedbackButtons buttonsNames={this.state}></FeedbackButtons>
+          <FeedbackButtons
+            buttonsNames={this.state}
+            clickHandler={this.addFeedbackScore}
+          />
         </Section>
-      </div>
+        <Section title="Statistics">
+          <FeedbackData
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+          />
+        </Section>
+      </>
     );
   }
 }
