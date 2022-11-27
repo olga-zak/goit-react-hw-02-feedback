@@ -12,13 +12,29 @@ class App extends Component {
 
   addFeedbackScore = event => {
     const clickedButton = event.target.textContent;
-    // console.log(clickedButton);
-    // console.log([clickedButton]);
-    // this.setState(prevState => console.log(prevState));
-    // document.activeElement.blur();
+    // this.setState(prevState => {
+    //   return {
+    //     [clickedButton]: (prevState[clickedButton] += 1),
+    //   };
+    // });
+    //более лаконичная запись: неявный возврат; функция возвращает объект, если не поставть () после =>, то интерпретатор расценит {} как тело функции.
+    //поэтому ставим () чтобы интерпретатор понял, что мы возвращаем некую сущность - {объект}
     this.setState(prevState => ({
       [clickedButton]: (prevState[clickedButton] += 1),
     }));
+  };
+
+  countTotalScore = () => {
+    const arrToSum = Object.values(this.state);
+
+    const sum = arrToSum.reduce((total, score) => {
+      return score + total;
+    }, 0);
+    return sum;
+
+    // arrToSum.reduce((total, score) => {
+    //   return score + total;
+    // }, 0);
   };
 
   render() {
@@ -35,6 +51,7 @@ class App extends Component {
             good={this.state.good}
             neutral={this.state.neutral}
             bad={this.state.bad}
+            totalScore={this.countTotalScore()}
           />
         </Section>
       </>

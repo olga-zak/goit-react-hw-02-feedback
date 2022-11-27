@@ -1,4 +1,4 @@
-export const FeedbackData = ({ good, neutral, bad }) => {
+export const FeedbackData = ({ good, neutral, bad, totalScore }) => {
   return (
     <ul>
       <li>
@@ -9,6 +9,9 @@ export const FeedbackData = ({ good, neutral, bad }) => {
       </li>
       <li>
         <p>Bad: {bad} </p>
+      </li>
+      <li>
+        <p>Total: {totalScore} </p>
       </li>
     </ul>
   );
