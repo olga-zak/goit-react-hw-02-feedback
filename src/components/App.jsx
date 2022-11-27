@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { FeedbackButtons } from './FeedbackButtons/FeedbackButtons';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Section } from './Section/Section';
 import { FeedbackData } from './FeedbackData/FeedbackData';
 
@@ -24,26 +24,27 @@ class App extends Component {
     }));
   };
 
-  countTotalScore = () => {
+  countTotalFeedback = () => {
     const arrToSum = Object.values(this.state);
-
-    const sum = arrToSum.reduce((total, score) => {
-      return score + total;
-    }, 0);
-    return sum;
-
     // arrToSum.reduce((total, score) => {
     //   return score + total;
     // }, 0);
+    return arrToSum.reduce((total, score) => {
+      return score + total;
+    }, 0);
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    return Math.round((this.state.good / this.countTotalFeedback()) * 100);
   };
 
   render() {
     return (
       <>
         <Section title="Please, leave feedback">
-          <FeedbackButtons
-            buttonsNames={this.state}
-            clickHandler={this.addFeedbackScore}
+          <FeedbackOptions
+            options={this.state}
+            onLeaveFeedback={this.addFeedbackScore}
           />
         </Section>
         <Section title="Statistics">
@@ -51,7 +52,8 @@ class App extends Component {
             good={this.state.good}
             neutral={this.state.neutral}
             bad={this.state.bad}
-            totalScore={this.countTotalScore()}
+            totalScore={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
           />
         </Section>
       </>
@@ -59,20 +61,3 @@ class App extends Component {
   }
 }
 export default App;
-
-// export const App = () => {
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         color: '#010101',
-//       }}
-//     >
-//       React homework template
-//     </div>
-//   );
-// };
