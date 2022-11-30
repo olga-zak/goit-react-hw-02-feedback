@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Section } from './Section/Section';
-import { FeedbackData } from './FeedbackData/FeedbackData';
+import { Statistics } from './Statistics/Statistics';
 import { Notification } from './Notification/Notification';
 
 class App extends Component {
@@ -27,9 +27,7 @@ class App extends Component {
 
   countTotalFeedback = () => {
     const arrToSum = Object.values(this.state);
-    // arrToSum.reduce((total, score) => {
-    //   return score + total;
-    // }, 0);
+
     return arrToSum.reduce((total, score) => {
       return score + total;
     }, 0);
@@ -52,7 +50,7 @@ class App extends Component {
           {this.countTotalFeedback() === 0 ? (
             <Notification message="There is no feedback" />
           ) : (
-            <FeedbackData
+            <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}

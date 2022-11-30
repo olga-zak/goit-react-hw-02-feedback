@@ -1,4 +1,6 @@
-export const FeedbackData = ({
+import PropTypes from 'prop-types';
+
+export const Statistics = ({
   good,
   neutral,
   bad,
@@ -24,4 +26,12 @@ export const FeedbackData = ({
       </li>
     </ul>
   );
+};
+
+Statistics.propTypes = {
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,
+  totalScore: PropTypes.number.isRequired,
+  positivePercentage: PropTypes.number.isRequired,
 };
